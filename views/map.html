@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #masterPane {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+        }
+
+        #mapArea {
+            position: relative;
+            background-image: url("https://github.com/turbine244/WebMap/blob/main/assets/background.png?raw=true");
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto;
+        }
+
+        #mapFog {
+            background-color: white;
+            opacity: 50%;
+            width: inherit;
+            height: inherit;
+            float: left;
+            position: absolute;
+            z-index: 100;
+        }
+
+        #topGlass {
+            width: inherit;
+            height: inherit;
+            float: left;
+            position: absolute;
+            z-index: 200;
+        }
+
+        .marker {
+            float: left;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .bubble {
+            float: left;
+            position: absolute;
+            z-index: 102;
+        }
+
+        .shakee {
+            animation-name: shake;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
+        .overFog_marker {
+            z-index: 101;
+            animation-name: shake;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            25% {
+                transform: rotate(-3deg)
+            }
+
+            50% {
+                transform: rotate(3deg)
+            }
+
+            75% {
+                transform: rotate(-3deg)
+            }
+
+            100% {
+                transform: rotate(0deg)
+            }
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            // INIT : PLACE
+            placeMarker();
+            placeBubble();
+
+            // INIT : HIDE
+            $('.bubble').hide();
+            $('#mapFog').hide();
+            $('#topGlass').hide();
+
+            // SET : HOVER MARKER
+            $('.marker').hover(
+                function () {
+                    $('.m' + $(this).attr('id')).addClass('shakee')
+                },
+                function () {
+                    $('.m' + $(this).attr('id')).removeClass('shakee')
+                }
+            )
+
+            // SET : CLICK MARKER
+            $('.marker').click(function () {
+                $('#mapFog').show();
+                $('#topGlass').show();
+
+                $('.m' + $(this).attr('id')).addClass('overFog_marker');
+                $('.b' + $(this).attr('id')).show();
+            })
+
+            // SET : CLICK TOPGLASS
+            $('#topGlass').click(function () {
+                $('.bubble').hide();
+                $('#mapFog').hide();
+                $('#topGlass').hide();
+                $('.marker').removeClass('overFog_marker');
+                $('.marker').removeClass('shakee')
+            })
+        });
+
+        let placeMarker = function () {
+            $('#1').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m1Cherry.png?raw=true");
+            $('#1').css({ left: 313, top: 268 });
+
+            $('#2').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m2Ferris.png?raw=true");
+            $('#2').css({ left: 498, top: 128 });
+
+            $('#3').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m3Train.png?raw=true");
+            $('#3').css({ left: 535, top: 7 });
+
+            $('#4').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m4Ninja.png?raw=true");
+            $('#4').css({ left: 726, top: 490 });
+
+            $('#5').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m5Chopper.png?raw=true");
+            $('#5').css({ left: 864, top: 4 });
+
+            $('#6').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m5OceanView.png?raw=true")
+            $('#6').css({ left: 339, top: 422 });
+
+            $('#7').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m6Float.png?raw=true");
+            $('#7').css({ left: 21, top: 309 });
+
+            $('#8').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m6Playgound.png?raw=true");
+            $('#8').css({ left: 1068, top: 503 });
+
+            $('#9').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m6Skyscrapper.png?raw=true");
+            $('#9').css({ left: 865, top: 221 });
+
+            $('#10').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m7Garden.png?raw=true");
+            $('#10').css({ left: 265, top: 39 });
+
+            $('#11').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m7Icecream.png?raw=true");
+            $('#11').css({ left: 1068, top: 248 });
+
+            $('#12').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m7Kickboard.png?raw=true");
+            $('#12').css({ left: 1114, top: 105 });
+
+            $('#13').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/marker/m7Tree.png?raw=true");
+            $('#13').css({ left: 21, top: 54 });
+        }
+        let placeBubble = function () {
+            $('#b1').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b1Cherry.png?raw=true");
+            $('#b1').css({ left: 218, top: 27 });
+
+            $('#b2').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b2Ferris.png?raw=true");
+            $('#b2').css({ left: 379, top: 416 });
+
+            $('#b3').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b3Train.png?raw=true");
+            $('#b3').css({ left: 450, top: 71 });
+
+            $('#b4').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b4Ninja.png?raw=true");
+            $('#b4').css({ left: 605, top: 229 });
+
+            $('#b5').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b5Chopper.png?raw=true");
+            $('#b5').css({ left: 769, top: 186 });
+
+            $('#b6').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b5OceanView.png?raw=true")
+            $('#b6').css({ left: 422, top: 222 });
+
+            $('#b7').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b6Float.png?raw=true");
+            $('#b7').css({ left: 23, top: 134 });
+
+            $('#b8').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b6Playground.png?raw=true");
+            $('#b8').css({ left: 995, top: 298 });
+
+            $('#b9').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b6Skyscrapper.png?raw=true");
+            $('#b9').css({ left: 755, top: 33 });
+
+            $('#b10').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b7Garden.png?raw=true");
+            $('#b10').css({ left: 385, top: 33 });
+
+            $('#b11').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b7Icecream.png?raw=true");
+            $('#b11').css({ left: 961, top: 343 });
+
+            $('#b12').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b7KickBoard.png?raw=true");
+            $('#b12').css({ left: 743, top: 0 });
+
+            $('#b13').attr("src", "https://github.com/turbine244/WebMap/blob/main/assets/bubble/b7Tree.png?raw=true");
+            $('#b13').css({ left: 0, top: 139 });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="masterPane">
+        <div id="mapArea">
+            <div id="mapFog"></div>
+            <div id="topGlass"></div>
+            <img class="marker m1" id="1"><img class="bubble b1" id="b1">
+            <img class="marker m2" id="2"><img class="bubble b2" id="b2">
+            <img class="marker m3" id="3"><img class="bubble b3" id="b3">
+            <img class="marker m4" id="4"><img class="bubble b4" id="b4">
+            <img class="marker m5 m6" id="5"><img class="bubble b5 b6" id="b5">
+            <img class="marker m5 m6" id="6"><img class="bubble b5 b6" id="b6">
+            <img class="marker m7 m8 m9" id="7"><img class="bubble b7 b8 b9" id="b7">
+            <img class="marker m7 m8 m9" id="8"><img class="bubble b7 b8 b9" id="b8">
+            <img class="marker m7 m8 m9" id="9"><img class="bubble b7 b8 b9" id="b9">
+            <img class="marker m10 m11 m12 m13" id="10"><img class="bubble b10 b11 b12 b13" id="b10">
+            <img class="marker m10 m11 m12 m13" id="11"><img class="bubble b10 b11 b12 b13" id="b11">
+            <img class="marker m10 m11 m12 m13" id="12"><img class="bubble b10 b11 b12 b13" id="b12">
+            <img class="marker m10 m11 m12 m13" id="13"><img class="bubble b10 b11 b12 b13" id="b13">
+
+        </div>
+</body>
+
+</html>
